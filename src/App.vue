@@ -1,63 +1,78 @@
 <template>
-<div class="container-app">
-    <div class="container-quiz">
-        <div class="quiz-header">
-          <h1>TRIVIA QUAZEMIC APSA</h1>
+<div>
+  <div>
+    <div v-for="(element,index) in questions.slice(a,b)" :key="index" v-show="running">
+      <div>
+        <div id="clock" class="text-principal">
+          TIEMPO {{time}}
         </div>
-        <div class="quiz-main" v-for="(element,index) in questions.slice(a,b)" :key="index" v-show="running">
-            <div class="box-question">
-              <h2>Question {{b}}/{{questions.length}}</h2>
-              <div id="clock">
-              <p class="text">Tiempo: {{time}}</p>
-              </div>
-              <p>{{element.question}}</p>
-            </div>
-            <div class="box-suggestions">
-              <ul>
-              <li v-for="(item,index) in element.suggestions" :key="index" :class="select ? check(item) : ''" @click="selectResponse(item)">{{item.suggestion}}</li>
-              </ul> 
-            </div>
-        </div>
-        <div class="box-score" v-if="score_show">
-          <h2>¡Gracias por responder! </h2>
-          <h3>Tu puntuación es: <strong style="color:red">{{score}}/6</strong></h3>        
-          <h3>Tiempo utilizado: <strong style="color:red">{{time}}</strong></h3>
-        <div class="section">
-         <hr />
-        </div>
-        <p>Para participar, por favor, completá los siguientes campos:</p>
-        <div class="form-group floating-label-form-group controls">
-
-              <input type="text" class="form-control" value="" placeholder="Nombre" v-model="name" id="name" name="name">
-               <p class="help-block text-danger">  </p>             
-        </div>
-         <div class="form-group floating-label-form-group controls">
-               <input type="text" class="form-control" value="" placeholder="DNI" v-model="dni" id="dni" name="dni">
-               <p class="help-block text-danger">  </p>             
-          </div>
-      
-              <div class="form-group floating-label-form-group controls">
-
-              <input type="text" class="form-control" value="" placeholder="Email" v-model="email" id="email" name="email">
-               <p class="help-block text-danger">  </p>             
-               </div>
-               
-              <div class="form-group floating-label-form-group controls">
-         
-              <input type="text" class="form-control" value="" placeholder="Teléfono" v-model="telefono" id="telefono" name="telefono">
-               <p class="help-block text-danger">  </p>             
-               </div>
-               <div class="form-group">
-            <button @click="guardaDatos" class="btn btn-primary" id="sendMessageButton">Participar</button> </div>
-             <h3>{{resultadoJ}}</h3>
-        </div>
-        <div class="quiz-footer" v-show="quiz">
-          
-         <div class="box-button" v-show="playing">
-         <button @click="start">Empezar</button>
+        <div class="d-flex align-items-center bg-secundario py-3">
+          <h2 class="ml-auto mr-3 font-weight-bold text-principal">
+            {{b}}
+          </h2>
+          <div class="ml-3 mr-auto text-center w-75 text-negro">
+            {{element.question}}
           </div>
         </div>
+      </div>
+      <div class="text-center">
+          <button v-for="(item,index) in element.suggestions"
+              :key="index"
+              class="btn btn-lg text-light mr-2 px-5 mt-3"
+              :class="select ? check(item) : 'bg-secondary'"
+              @click="selectResponse(item)"
+              >{{item.suggestion}}</button>
+      </div>
     </div>
+    <div class="box-score" v-if="score_show">
+      <h2>¡GRACIAS POR RESPONDER! </h2>
+      <p class="text-negro bg-secundario p-4">RESPONDIÓ CORRECTAMENTE <span class="text-principal font-weight-bold">{{score}}</span> PREGUNTAS EN <span class="text-principal font-weight-bold">{{time}}</span> SEGUNDOS</p>
+      <p class="font-italic">Para participar, por favor complete estos datos:</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group floating-label-form-group controls">
+            <input type="text" class="form-control" placeholder="Nombre" v-model="name" id="name" name="name" required="required">
+            <p class="help-block text-danger">  </p>
+          </div>
+          <div class="form-group floating-label-form-group controls">
+            <input type="text" class="form-control" placeholder="DNI" v-model="dni" id="dni" name="dni" required="required">
+            <p class="help-block text-danger">  </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group floating-label-form-group controls">
+            <input type="email" class="form-control" placeholder="Email" v-model="email" id="email" name="email" required="required">
+            <p class="help-block text-danger">  </p>
+          </div>
+          <div class="form-group floating-label-form-group controls">
+            <input type="text" class="form-control" placeholder="Teléfono" v-model="telefono" id="telefono" name="telefono" required="required">
+            <p class="help-block text-danger">  </p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button @click="guardaDatos"
+                class="btn btn-lg px-5 btn-outline-danger font-weight-bold"
+                id="sendMessageButton"
+                style="border: 3px solid"
+                >ENVIAR</button>
+      </div>
+      <p class="font-italic text-negro">Nos comunicaremos para avisarle en caso de haber ganado un premio.</p>
+      <h3>{{resultadoJ}}</h3>
+    </div>
+    <div class="quiz-footer" v-show="quiz">
+      <div class="box-button" v-show="playing">
+        <h3 class="font-weight-bold">RESPONDA LA TRIVIA, COMPLETE SUS DATOS Y PARTICIPE</h3>
+        <p class="bg-secundario p-3"><span>PREMIOS: <span class="text-principal">10</span> LOREM IPSUM DOLOR CONSECTETUER - <span class="text-principal">100</span> LOREM IPSUM DOLOR </span><br>
+        <span class="font-italic">para quienes respondan más preguntas correctas en menos tiempo</span></p>
+        <button @click="start"
+                type="button"
+                class="btn btn-lg btn-outline-danger px-5"
+                style="border: 3px solid"
+                > EMPEZAR </button>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -134,8 +149,8 @@ export default {
      telefono:"",
      resultadoJ:"",
 
-     
-     
+
+
 
     }
   },
@@ -167,7 +182,7 @@ randomize() {
       for (let i = this.questions.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     const temp = this.questions[i];
-    this.questions[i]= this.questions[j]; 
+    this.questions[i]= this.questions[j];
     this.questions[j]= temp;
   }
     },
@@ -185,10 +200,10 @@ randomize() {
   },
 
   check(status){
-    if(status.correct){    
-      return 'correct'
+    if(status.correct){
+      return 'bg-success'
     }else{
-      return 'incorrect'
+      return 'bg-danger'
     }
 
     },
@@ -224,13 +239,11 @@ randomize() {
   clockRunning(){
   var currentTime = new Date()
   , timeElapsed = new Date(currentTime - this.timeBegan - this.stoppedDuration)
-  , hour = timeElapsed.getUTCHours()
   , min = timeElapsed.getUTCMinutes()
   , sec = timeElapsed.getUTCSeconds();
 
-  this.time = 
-    this.zeroPrefix(hour, 2) + ":" + 
-    this.zeroPrefix(min, 2) + ":" + 
+  this.time =
+    this.zeroPrefix(min, 2) + ":" +
     this.zeroPrefix(sec, 2);
 },
 
@@ -246,9 +259,9 @@ randomize() {
   this.randomize();
   this.playing=false;
   if(this.running) return;
-  
+
   if (this.timeBegan === null) {
-    
+
     this.timeBegan = new Date();
   }
 
@@ -256,7 +269,7 @@ randomize() {
     this.stoppedDuration += (new Date() - this.timeStopped);
   }
 
-  this.started = setInterval(this.clockRunning, 10);  
+  this.started = setInterval(this.clockRunning, 10);
   this.running = true;
 },
 

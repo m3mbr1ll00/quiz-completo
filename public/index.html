@@ -5,16 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link rel="stylesheet" href="css/app.css" >
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital@1&display=swap" rel="stylesheet">
-    <title>TRIVIA QUAZEMIC APSA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
+    <title>TRIVIA QUAZEMIC || APSA </title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>
+        Lo sentimos, pero la trivia no funcionará correctamente con
+        JavaScript deshabilitado. Por favor, habilítelo para continuar.
+      </strong>
     </noscript>
-    <div id="app"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 text-center mb-1 shadow">
+          <img class="img-fluid" src="img/header.png" alt="QUAZEMIC">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <div id=app></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center bg-principal p-4">
+          <img src="img/footer.png" alt="QUAZEMIC">
+        </div>
+      </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
