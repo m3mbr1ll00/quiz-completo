@@ -63,11 +63,45 @@
     <div class="quiz-footer" v-show="quiz">
       <div class="box-button" v-show="playing">
         <h3 class="font-weight-bold">RESPONDA LA TRIVIA, COMPLETE SUS DATOS Y PARTICIPE</h3>
-        <p class="bg-secundario p-3"><span>PREMIOS: <span class="text-principal">10</span> LOREM IPSUM DOLOR CONSECTETUER - <span class="text-principal">100</span> LOREM IPSUM DOLOR </span><br>
-        <span class="font-italic">para quienes respondan más preguntas correctas en menos tiempo</span></p>
+        <div class="bg-secundario py-2">
+          <span class="font-weight-bold">PREMIOS:</span>
+          <div class="row my-2">
+            <div class="col-md-3 col-sm-9 border border-secondary ml-md-auto mr-md-2 mx-sm-auto mt-2 p-2">
+              <div class="d-flex align-items-center align-middle">
+                <img class="ml-auto" width="85" src="img/NESPRESSO.png" alt="CAFETERA NESPRESSO INISSIA C40">
+                <div class="text-left ml-2 mr-auto">
+                  <span class="text-principal font-weight-bold">5</span> CAFETERAS <br>
+                  NESPRESSO <br>
+                  INISSIA C40
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-9 border border-secondary mx-md-2 mx-sm-auto mt-2 p-2">
+              <div class="d-flex align-items-center align-middle">
+                <img class="ml-auto" width="85" src="img/DSM5.png" alt="DSM-5 EDICION CONCEPTUAL">
+                <div class="text-left ml-2 mr-auto">
+                  <span class="text-principal font-weight-bold">5</span> DSM-5 <br>
+                  EDICIÓN <br>
+                  CONCEPTUAL
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-9 border border-secondary ml-md-2 mr-md-auto mx-sm-auto mt-2 p-2">
+              <div class="d-flex align-items-center align-middle">
+                <img class="ml-auto" width="85" src="img/manualPF.png" alt="MANUAL DE PSICOFARMACOLOGIA">
+                <div class="text-left ml-2 mr-auto">
+                  <span class="text-principal font-weight-bold">10</span> MANUALES <br>
+                  DE PSICO- <br>
+                  FARMACOLOGÍA
+                </div>
+              </div>
+            </div>
+          </div>
+          <p><span class="font-italic">para quienes respondan más preguntas correctas en menos tiempo</span></p>
+        </div>
         <button @click="start"
                 type="button"
-                class="btn btn-lg btn-outline-danger px-5"
+                class="btn btn-lg btn-outline-danger px-5 mt-2"
                 style="border: 3px solid"
                 > EMPEZAR </button>
       </div>
