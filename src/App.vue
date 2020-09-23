@@ -90,7 +90,7 @@
               <div class="d-flex align-items-center align-middle">
                 <img class="ml-auto" width="85" src="img/manualPF.png" alt="MANUAL DE PSICOFARMACOLOGIA">
                 <div class="text-left ml-2 mr-auto">
-                  <span class="text-principal font-weight-bold">10</span> MANUALES <br>
+                  <span class="text-principal font-weight-bold">20</span> MANUALES <br>
                   DE PSICO- <br>
                   FARMACOLOGÍA
                 </div>
@@ -129,7 +129,7 @@ export default {
         suggestions:[
           {suggestion:'4 horas'},
           {suggestion:'1 hora'},
-          {suggestion:'Mayor ', correct:true},
+          {suggestion:'Mayor a 20 horas', correct:true},
         ]
       },
       {
