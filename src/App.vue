@@ -27,37 +27,41 @@
     <div class="box-score" v-if="score_show">
       <h2>¡GRACIAS POR RESPONDER! </h2>
       <p class="text-negro bg-secundario p-4">RESPONDIÓ CORRECTAMENTE <span class="text-principal font-weight-bold">{{score}}</span> PREGUNTAS EN <span class="text-principal font-weight-bold">{{time}}</span> SEGUNDOS</p>
-      <p class="font-italic">Para participar, por favor complete estos datos:</p>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group floating-label-form-group controls">
-            <input type="text" class="form-control" placeholder="Nombre" v-model="name" id="name" name="name" required="required">
-            <p class="help-block text-danger">  </p>
+      <div v-if="resultadoJ == '' || resultadoJ == 'Por favor, completar todos los campos.' || resultadoJ == 'Por favor, ingrese un email válido.'">
+        <p class="font-italic">Para participar, por favor complete estos datos:</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group floating-label-form-group controls">
+              <input type="text" class="form-control" placeholder="Nombre" v-model="name" id="name" name="name" required="required">
+              <p class="help-block text-danger">  </p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+              <input type="text" class="form-control" placeholder="DNI" v-model="dni" id="dni" name="dni" required="required">
+              <p class="help-block text-danger">  </p>
+            </div>
           </div>
-          <div class="form-group floating-label-form-group controls">
-            <input type="text" class="form-control" placeholder="DNI" v-model="dni" id="dni" name="dni" required="required">
-            <p class="help-block text-danger">  </p>
+          <div class="col-md-6">
+            <div class="form-group floating-label-form-group controls">
+              <input type="email" class="form-control" placeholder="Email" v-model="email" id="email" name="email" required="required">
+              <p class="help-block text-danger">  </p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+              <input type="text" class="form-control" placeholder="Teléfono" v-model="telefono" id="telefono" name="telefono" required="required">
+              <p class="help-block text-danger">  </p>
+            </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="form-group floating-label-form-group controls">
-            <input type="email" class="form-control" placeholder="Email" v-model="email" id="email" name="email" required="required">
-            <p class="help-block text-danger">  </p>
-          </div>
-          <div class="form-group floating-label-form-group controls">
-            <input type="text" class="form-control" placeholder="Teléfono" v-model="telefono" id="telefono" name="telefono" required="required">
-            <p class="help-block text-danger">  </p>
-          </div>
+        <div class="form-group">
+          <button @click="guardaDatos"
+                  class="btn btn-lg px-5 btn-outline-danger font-weight-bold"
+                  id="sendMessageButton"
+                  style="border: 3px solid"
+                  >ENVIAR</button>
         </div>
       </div>
-      <div class="form-group">
-        <button @click="guardaDatos"
-                class="btn btn-lg px-5 btn-outline-danger font-weight-bold"
-                id="sendMessageButton"
-                style="border: 3px solid"
-                >ENVIAR</button>
+      <div v-else>
+        <p class="font-italic text-negro">Nos comunicaremos para avisarle en caso de haber ganado un premio.</p>
       </div>
-      <p class="font-italic text-negro">Nos comunicaremos para avisarle en caso de haber ganado un premio.</p>
       <h3>{{resultadoJ}}</h3>
     </div>
     <div class="quiz-footer" v-show="quiz">
@@ -199,6 +203,8 @@ methods:{
     puntaje:this.score,
     tiempo:this.time,
   };
+
+  axios.defaults.headers['Content-Type'] = 'application/json';
 
   await axios.post('/guardaDatos.php',info)
     .then((response) => {
